@@ -17,6 +17,10 @@ namespace NavKeypad
         public float debugRaySeconds = 0f;      // biar kelihatan garis ray di scene
 
         [SerializeField] Camera cam;
+        // reference ke spotlightnya
+        public GameObject flashlight;
+        // reference ke clue nya
+        public GameObject clue;
 
         void Start()
         {
@@ -50,13 +54,6 @@ namespace NavKeypad
 
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.yellow, debugRaySeconds);
 
-                // Contoh: tekan E untuk interaksi
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    Debug.Log("Interacted with " + hit.collider.name);
-                    // TODO: panggil script di object, misal buka pintu atau ambil item
-                }
-
                 if (Input.GetMouseButtonDown(0))
                 {
                     Debug.Log("ngehit 1 = " + hit.collider.name);
@@ -64,6 +61,16 @@ namespace NavKeypad
                     {
                         Debug.Log("ngehit 2 = " + hit.collider.name);
                         keypadButton.PressButton();
+                    }
+
+                    if (hit.collider.name == "Flashlight")
+                    {
+                        flashlight.SetActive(!flashlight.activeSelf);
+                    }
+
+                    if (hit.collider.name == "book")
+                    {
+                        clue.SetActive(!clue.activeSelf);
                     }
                 }
             }
