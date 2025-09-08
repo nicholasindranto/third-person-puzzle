@@ -8,6 +8,11 @@ namespace NavKeypad
         [SerializeField] private Animator anim;
         public bool IsOpoen => isOpen;
         private bool isOpen = false;
+        public GameObject gamewinui;
+
+        private void Start() {
+            gamewinui.SetActive(false);
+        }
 
         public void ToggleDoor()
         {
@@ -19,6 +24,7 @@ namespace NavKeypad
         {
             isOpen = true;
             anim.SetBool("isOpen", isOpen);
+            gamewinui.SetActive(true);
         }
         public void CloseDoor()
         {
